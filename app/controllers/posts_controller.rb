@@ -1,10 +1,12 @@
 class PostsController < ApplicationController
+  include PostNotifier
+
   before_action :set_post, only: %i[ show edit update destroy ]
   before_action :authenticate_user!, only: %i[ show edit destroy ]
 
   # GET /posts or /posts.json
   def index
-    @posts = Post.paginate(:page => params[:page], per_page: 2)
+    @posts = Post.paginate(:page => params[:page], per_page: 5)
   end
 
   # GET /posts/1 or /posts/1.json
